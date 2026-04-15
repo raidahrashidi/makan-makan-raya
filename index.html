@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Makan Makan Raya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg-1: #fff8fb;
+      --bg-2: #fffdf8;
+      --primary: #c786a5;
+      --primary-dark: #9f5d7b;
+      --soft-pink: #f9d9e7;
+      --soft-rose: #f6e8ef;
+      --soft-gold: #ecd9b0;
+      --text: #6b4b5c;
+      --muted: #8a7080;
+      --white: rgba(255,255,255,0.84);
+      --border: rgba(255,255,255,0.75);
+      --shadow: 0 20px 50px rgba(201, 143, 173, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 224, 236, 0.9), transparent 28%),
+        radial-gradient(circle at top right, rgba(255, 244, 226, 0.9), transparent 24%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    .floating-blur {
+      position: fixed;
+      inset: auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.45;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .blur-1 { top: -80px; left: -60px; background: #ffd7e7; }
+    .blur-2 { top: 180px; right: -80px; background: #fff0c7; }
+    .blur-3 { bottom: 80px; left: 10%; background: #ffe5ef; }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkles span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(255,255,255,0.9);
+      animation: floatSparkle 7s linear infinite;
+    }
+
+    .sparkles span:nth-child(1) { left: 10%; top: 100%; animation-delay: 0s; }
+    .sparkles span:nth-child(2) { left: 25%; top: 100%; animation-delay: 1s; }
+    .sparkles span:nth-child(3) { left: 42%; top: 100%; animation-delay: 2.2s; }
+    .sparkles span:nth-child(4) { left: 58%; top: 100%; animation-delay: 3.3s; }
+    .sparkles span:nth-child(5) { left: 74%; top: 100%; animation-delay: 4.1s; }
+    .sparkles span:nth-child(6) { left: 88%; top: 100%; animation-delay: 5s; }
+
+    @keyframes floatSparkle {
+      0% { transform: translateY(0) scale(0.7); opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+    }
+
+    .ketupat-corner {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.8;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.08));
+      z-index: 2;
+    }
+
+    .ketupat-top-left { top: 20px; left: 22px; }
+    .ketupat-top-right { top: 20px; right: 22px; }
+    .ketupat-bottom-left { bottom: 20px; left: 22px; }
+    .ketupat-bottom-right { bottom: 20px; right: 22px; }
+
+    .welcome-screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        linear-gradient(135deg, rgba(255,248,251,0.96), rgba(255,253,248,0.96));
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .welcome-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .welcome-card {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 32px;
+      box-shadow: 0 20px 50px rgba(201, 143, 173, 0.18);
+      padding: 34px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome-card h1 {
+      margin: 0 0 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      color: var(--primary-dark);
+      line-height: 1;
+    }
+
+    .welcome-kicker {
+      font-size: 0.92rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+
+    .welcome-card p {
+      margin: 0 auto 22px;
+      max-width: 380px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .open-btn,
+    .music-btn,
+    .contact-btn,
+    .calendar-btn {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .open-btn {
+      padding: 15px 22px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e6a7c2, #c786a5);
+      color: white;
+      box-shadow: 0 12px 24px rgba(199, 134, 165, 0.28);
+    }
+
+    .open-btn:hover,
+    .music-btn:hover,
+    .contact-btn:hover,
+    .calendar-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    .wrapper {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card,
+    .section-card {
+      background: var(--white);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card { margin-bottom: 24px; }
+
+    .hero-image-wrap {
+      position: relative;
+      height: 430px;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(123, 84, 104, 0.45), rgba(255,255,255,0.05));
+    }
+
+    .hero-intro {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      color: white;
+    }
+
+    .mini-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.28);
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-family {
+      margin: 0 0 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.96);
+      text-shadow: 0 8px 18px rgba(0,0,0,0.14);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      line-height: 0.95;
+      letter-spacing: 0.5px;
+      text-shadow: 0 10px 24px rgba(0,0,0,0.16);
+    }
+
+    .hero-subtitle {
+      margin: 14px 0 18px;
+      max-width: 720px;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.95);
+    }
+
+    .scroll-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.92);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .opening {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .opening .eyebrow {
+      color: var(--primary-dark);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .opening h2 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--primary-dark);
+      line-height: 1;
+    }
+
+    .opening p {
+      margin: 0 auto;
+      max-width: 760px;
+      font-size: 1rem;
+      line-height: 1.95;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 20px;
+      margin: 20px 0 0;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .detail-box,
+    .countdown-card,
+    .guest-counter,
+    .map-card,
+    .rsvp-card,
+    .gallery-card,
+    .closing-card,
+    .info-pills,
+    .contact-actions {
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,250,252,0.9));
+      border: 1px solid #ffe7f0;
+      box-shadow: 0 12px 28px rgba(227, 164, 194, 0.10);
+    }
+
+    .detail-box {
+      padding: 18px;
+    }
+
+    .detail-label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .detail-value,
+    .detail-value a {
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .detail-value a:hover,
+    .map-actions a:hover { text-decoration: underline; }
+
+    .countdown-card {
+      padding: 22px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,239,246,0.95), rgba(255,250,239,0.95));
+    }
+
+    .countdown-card h3,
+    .section-title {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--primary-dark);
+    }
+
+    .countdown-text {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .event-inline-meta {
+      margin: 2px 0 14px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .event-inline-meta span {
+      opacity: 0.45;
+      margin: 0 10px;
+    }
+
+    .countdown-time {
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.55;
+    }
+
+    .flip-countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .flip-unit {
+      text-align: center;
+    }
+
+    .flip-number {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff, #ffeef5);
+      border: 1px solid #f3d6e3;
+      box-shadow: 0 10px 22px rgba(199, 134, 165, 0.12);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .flip-number.flip {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 28px rgba(199, 134, 165, 0.18);
+    }
+
+    .flip-number::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: rgba(159, 93, 123, 0.12);
+    }
+
+    .flip-label {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .guest-counter {
+      margin-top: 18px;
+      padding: 16px 18px;
+      text-align: center;
+      font-weight: 600;
+      color: var(--primary-dark);
+      background: linear-gradient(135deg, rgba(255,248,252,0.95), rgba(255,252,247,0.95));
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-card {
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .map-card { overflow: hidden; }
+
+    .map-card iframe {
+      width: 100%;
+      height: 360px;
+      border: 0;
+      display: block;
+    }
+
+    .map-actions {
+      padding: 16px;
+      text-align: center;
+      background: rgba(255,250,252,0.8);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .map-actions a {
+      color: var(--primary-dark);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .info-pills {
+      margin-top: 18px;
+      padding: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .pill {
+      background: #fff3f8;
+      border: 1px solid #f4d5e3;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 0.93rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .rsvp-layout {
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .rsvp-side,
+    .rsvp-card {
+      padding: 22px;
+    }
+
+    .rsvp-side {
+      background: linear-gradient(180deg, rgba(255,243,248,0.95), rgba(255,250,246,0.95));
+      border-radius: var(--radius-lg);
+      border: 1px solid #ffe4ef;
+      box-shadow: 0 12px 28px rgba(227, 164, 194, 0.10);
+    }
+
+    .rsvp-side p {
+      margin: 0 0 14px;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    .rsvp-tips {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 16px;
+      border: 1px solid #f3d8e4;
+      background: rgba(255,255,255,0.95);
+      font-family: inherit;
+      font-size: 0.98rem;
+      color: var(--text);
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #dfabc3;
+      box-shadow: 0 0 0 4px rgba(233, 160, 193, 0.14);
+      transform: translateY(-1px);
+    }
+
+    textarea {
+      min-height: 108px;
+      resize: vertical;
+    }
+
+    .pax-wrap {
+      display: grid;
+      gap: 8px;
+    }
+
+    .pax-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .pax-control {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px;
+      border-radius: 18px;
+      border: 1px solid #f3d8e4;
+      background: rgba(255,255,255,0.95);
+    }
+
+    .pax-btn {
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #f7d2e1, #ebb7cd);
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(199, 134, 165, 0.15);
+      transition: 0.2s ease;
+    }
+
+    .pax-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    #paxInput {
+      flex: 1;
+      text-align: center;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: 0 6px;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+
+    #paxInput::-webkit-outer-spin-button,
+    #paxInput::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #paxInput:focus {
+      box-shadow: none;
+      transform: none;
+      outline: none;
+    }
+
+    .btn {
+      border: none;
+      padding: 15px 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #e6a7c2, #c786a5);
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(199, 134, 165, 0.28);
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    .success {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: #fff3f8;
+      border: 1px solid #f0c8d9;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-card {
+      overflow: hidden;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-card div {
+      padding: 14px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-actions {
+      margin-top: 18px;
+      padding: 18px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-btn,
+    .calendar-btn {
+      text-decoration: none;
+      padding: 13px 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #f7d2e1, #ebb7cd);
+      color: var(--primary-dark);
+      box-shadow: 0 10px 20px rgba(199, 134, 165, 0.14);
+    }
+
+    .closing-card {
+      padding: 28px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(255,244,249,0.96), rgba(255,250,242,0.96));
+    }
+
+    .closing-card h3 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.3rem;
+      color: var(--primary-dark);
+    }
+
+    .closing-card p {
+      margin: 0 auto;
+      max-width: 760px;
+      line-height: 1.95;
+      color: var(--muted);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .music-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 999;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f7d2e1, #ebb7cd);
+      color: var(--primary-dark);
+      box-shadow: 0 12px 24px rgba(199, 134, 165, 0.18);
+    }
+
+    @media (max-width: 900px) {
+      .rsvp-layout, 
+
+      .hero-title { font-size: 3.1rem; }
+    }
+
+    @media (max-width: 640px) {
+      .wrapper { padding: 18px 12px 40px; }
+      .hero-image-wrap { height: 320px; }
+      .hero-intro { left: 18px; right: 18px; bottom: 18px; }
+      .hero-title { font-size: 2.5rem; }
+      .hero-family { font-size: 1.25rem; }
+      .content, .section-card { padding: 18px; }
+      .details-grid { grid-template-columns: 1fr; }
+      .opening h2 { font-size: 2.35rem; }
+      .countdown-time { font-size: 1.28rem; }
+      .flip-countdown { grid-template-columns: repeat(2, 1fr); }
+      .flip-number { min-height: 72px; font-size: 1.6rem; }
+      .event-inline-meta {
+        font-size: 0.92rem;
+        line-height: 1.8;
+      }
+      .event-inline-meta span {
+        display: inline-block;
+        margin: 0 6px;
+      }
+      .map-card iframe { height: 280px; }
+      .welcome-card h1 { font-size: 2.5rem; }
+      .music-btn { bottom: 14px; right: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="welcome-card">
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <h1>Makan Makan Raya</h1>
+<!--      <p>
+        Assalamualaikum 🌸<br>
+        Dengan penuh kasih dan rasa syukur,<br>
+        anda dijemput untuk<br>
+        memeriahkan jamuan raya di rumah kami.
+      </p>-->
+      <button class="open-btn" id="openInvitationBtn">Buka Jemputan ✨</button>
+    </div>
+  </div>
+
+  <div class="floating-blur blur-1"></div>
+  <div class="floating-blur blur-2"></div>
+  <div class="floating-blur blur-3"></div>
+
+  <div class="sparkles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="YOUR_MUSIC_URL.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicBtn" class="music-btn">🎵 Play Lagu Raya</button>
+
+  <div class="wrapper">
+    <section class="hero-card fade-up">
+      <div class="ketupat-corner ketupat-top-left"> </div>
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="hero-image-wrap">
+        <img src="https://drive.google.com/uc?export=view&id=1u14xGgP2z5b3Oqhi3wGO_wpb_XK6dHrl" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-intro">
+          <!-- <div class="mini-badge">🌸 Aidilfitri Gathering • Open House Vibes</div> 
+          <p class="hero-family">Keluarga Raihana Zahra</p> -->
+          <h1 class="hero-title">Makan Makan Raya</h1>
+          <p class="hero-subtitle">
+            Jemput datang rumah kami untuk sama-sama beraya,<br>
+            makan sedap, borak panjang, ambil gambar cantik,<br>
+            dan meriahkan suasana dengan gelak tawa orang tersayang 💖
+          </p>
+          <div class="scroll-hint">Scroll to open invitation ↓</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="opening fade-up">
+          <div class="eyebrow">With love & warm raya vibes</div>
+          <h2>Jemputan Ikhlas Dari Rumah Kami</h2>
+          <p>
+            Assalamualaikum dan salam Aidilfitri ✨ <br>
+            Dengan penuh rasa syukur, kami ingin menjemput anda singgah ke<br>
+            <strong>jamuan raya kecil-kecilan di rumah kami</strong>.<br>
+            Tak perlu formal sangat — datang santai, datang lapar,<br>
+            datang bawa senyuman pun dah cukup menceriakan hari kami.<br>
+            Jom luangkan masa, eratkan silaturrahim,<br>
+            dan cipta memori manis bersama-sama 🌷
+          </p>
+        </div>
+
+        <div class="grid-2 fade-up">
+          <div class="countdown-card" style="grid-column: 1 / -1;">
+            <h3>Detik Menuju Hari Raya</h3>
+            <div class="event-inline-meta">18 April 2026 <span>|</span> 11:00 pagi – 5:00 petang</div>
+            <div class="countdown-text">Tak sabar nak sambut semua orang di rumah kami.<br>
+              Lagi sedikit je sebelum kita jumpa ✨</div>
+
+            <div class="flip-countdown" id="flipCountdown">
+              <div class="flip-unit">
+                <div class="flip-number" id="daysBox">00</div>
+                <div class="flip-label">Days</div>
+              </div>
+              <div class="flip-unit">
+                <div class="flip-number" id="hoursBox">00</div>
+                <div class="flip-label">Hours</div>
+              </div>
+              <div class="flip-unit">
+                <div class="flip-number" id="minutesBox">00</div>
+                <div class="flip-label">Minutes</div>
+              </div>
+              <div class="flip-unit">
+                <div class="flip-number" id="secondsBox">00</div>
+                <div class="flip-label">Seconds</div>
+              </div>
+            </div>
+
+            <div class="guest-counter" id="guestCounter">👥 Sedang kira jumlah tetamu yang akan hadir...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card fade-up">
+      <div class="ketupat-corner ketupat-top-left"> </div>
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="section-heading">
+        <h2 class="section-title">Lokasi Majlis</h2>
+        <p>Tekan peta untuk rancang perjalanan anda,<br>
+          atau buka terus dalam Google Maps untuk lagi mudah.</p>
+      </div>
+
+      <div class="map-card">
+        <iframe
+          src="https://www.google.com/maps?q=3.0780,101.48942&z=15&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-actions">
+          📍 <a href="https://maps.google.com/?q=3.0780,101.48942" target="_blank">Buka lokasi penuh di Google Maps</a>
+        </div>
+      </div>
+
+   <!--   <div class="info-pills">
+        <div class="pill">🌸 Santai & mesra</div>
+        <div class="pill">📸 Boleh ambil gambar cantik</div>
+        <div class="pill">💖 Datang bawa senyuman</div>
+      </div> -->
+    </section>
+
+    <section class="section-card fade-up">
+      <div class="ketupat-corner ketupat-top-left"> </div>
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="section-heading">
+        <h2 class="section-title">RSVP Kehadiran</h2>
+        <p>Boleh isi kehadiran dekat bawah ya supaya kami boleh buat<br>
+          persiapan makan, tempat, dan sambutan dengan lebih teratur 💌</p>
+      </div>
+
+      <div class="rsvp-layout">
+ <!--       <div class="rsvp-side">
+          <h3 class="section-title" style="font-size: 1.8rem; text-align:left; margin-bottom:10px;">Info Ringkas</h3>
+          <p>
+            Isi RSVP ni kejap je. Bila anda hantar, nama anda akan terus masuk ke senarai tetamu kami dan notifikasi akan dihantar ke Telegram secara automatik.
+          </p>
+          <ul class="rsvp-tips">
+            <li>Isi nama dan nombor telefon yang mudah dihubungi</li>
+            <li>Pilih sama ada hadir atau tidak hadir</li>
+            <li>Masukkan bilangan tetamu supaya mudah kami sediakan tempat</li>
+            <li>Kalau ada apa-apa pesan, boleh tulis sekali</li>
+          </ul> 
+        </div> -->
+
+        <div class="rsvp-card">
+          <form id="rsvpForm">
+            <input type="text" name="name" placeholder="Nama" required>
+            <input type="tel" name="phone" placeholder="No. Telefon" required>
+            <select name="attendance" required>
+              <option value="">Kehadiran</option>
+              <option value="Hadir">Hadir</option>
+              <option value="Tidak Hadir">Tidak Hadir</option>
+            </select>
+
+            <div class="pax-wrap">
+              <label class="pax-label" for="paxInput">Bilangan tetamu</label>
+              <div class="pax-control">
+                <button type="button" class="pax-btn" id="minusPax">−</button>
+                <input type="number" name="pax" id="paxInput" min="1" value="1" inputmode="numeric">
+                <button type="button" class="pax-btn" id="plusPax">+</button>
+              </div>
+            </div>
+
+            <textarea name="message" placeholder="Apa-apa ucapan / makluman tambahan"></textarea>
+            <button class="btn" type="submit">Hantar RSVP 💌</button>
+          </form>
+
+          <div class="success" id="successMsg">RSVP berjaya dihantar. Yay, jumpa nanti 🌸</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card fade-up">
+      <div class="ketupat-corner ketupat-top-left"> </div>
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="section-heading">
+    <!--    <h2 class="section-title">Sedikit Preview Suasana</h2>
+        <p>Kalau nak bagi website nampak lebih premium, boleh letak beberapa gambar suasana rumah, juadah, atau vibe raya.</p>
+      </div> -->
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="YOUR_GALLERY_IMAGE_1" alt="Raya vibes 1">
+          <div>Ruang santai untuk borak-borak</div>
+        </div>
+        <div class="gallery-card">
+          <img src="YOUR_GALLERY_IMAGE_2" alt="Raya vibes 2">
+          <div>Juadah raya yang menanti</div>
+        </div>
+        <div class="gallery-card">
+          <img src="YOUR_GALLERY_IMAGE_3" alt="Raya vibes 3">
+          <div>Sudut manis untuk ambil gambar</div>
+        </div>
+      </div>
+
+      <div class="contact-actions">
+        <a class="contact-btn" href="tel:+60148503394">📞Hubungi Tuan Rumah</a>
+        <a class="calendar-btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Makan%20Makan%20Raya&dates=20260418T030000Z/20260412T090000Z&details=Jemputan%20jamuan%20raya%20di%20rumah&location=Kampung%20Padang%20Lalang">🗓️ Simpan ke Calendar</a>
+      </div>
+    </section>
+
+    <section class="section-card fade-up">
+      <div class="ketupat-corner ketupat-top-left"> </div>
+      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="closing-card">
+        <h3>Kehadiran Anda Sangat Bermakna</h3>
+        <p>
+          Semoga dengan kehadiran anda, rumah kami bertambah meriah,<br>
+          hati bertambah lapang,dan Aidilfitri kali ini<br>
+          jadi lebih indah untuk dikenang.<br>
+          Kami tunggu anda di rumah ya 💕
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const eventDate = new Date("2026-04-18T11:00:00").getTime();
+    const daysBox = document.getElementById("daysBox");
+    const hoursBox = document.getElementById("hoursBox");
+    const minutesBox = document.getElementById("minutesBox");
+    const secondsBox = document.getElementById("secondsBox");
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD_QVXV0ncUETVwqTtFewAc5Uk0IKrFpfxBsT3EnrkBH_fzpl4o_CdkxqNG3tTiA4N/exec";
+    const form = document.getElementById("rsvpForm");
+    const successMsg = document.getElementById("successMsg");
+    const guestCounter = document.getElementById("guestCounter");
+    const paxInput = document.getElementById("paxInput");
+    const minusPax = document.getElementById("minusPax");
+    const plusPax = document.getElementById("plusPax");
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    const openInvitationBtn = document.getElementById("openInvitationBtn");
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+
+    let isPlaying = false;
+
+    // 🎧 fade in function
+    function fadeInAudio(audio, duration = 2000) {
+    audio.volume = 0;
+    audio.play();
+
+    let step = 0.05;
+    let interval = duration * step;
+
+    let fade = setInterval(() => {
+        if (audio.volume < 0.6) {
+        audio.volume = Math.min(audio.volume + step, 0.6);
+        } else {
+        clearInterval(fade);
+        }
+    }, interval);
+    }
+
+    // buka invitation → auto play with fade
+    openInvitationBtn.addEventListener("click", async () => {
+    welcomeScreen.classList.add("hidden");
+
+    try {
+        fadeInAudio(music, 2000);
+        isPlaying = true;
+        musicBtn.textContent = "⏸ Pause Lagu Raya";
+    } catch (error) {
+        console.log("Autoplay blocked");
+    }
+    });
+
+    // button control
+    musicBtn.addEventListener("click", () => {
+    if (!isPlaying) {
+        fadeInAudio(music, 2000);
+        isPlaying = true;
+        musicBtn.textContent = "⏸ Pause Lagu Raya";
+    } else {
+        music.pause();
+        isPlaying = false;
+        musicBtn.textContent = "🎵 Play Lagu Raya";
+    }
+    });
+
+    minusPax.addEventListener("click", () => {
+      const current = Number(paxInput.value) || 1;
+      if (current > 1) {
+        paxInput.value = current - 1;
+      }
+    });
+
+    plusPax.addEventListener("click", () => {
+      const current = Number(paxInput.value) || 1;
+      paxInput.value = current + 1;
+    });
+
+    paxInput.addEventListener("input", () => {
+      let current = paxInput.value.replace(/[^0-9]/g, "");
+
+      if (current === "") {
+        paxInput.value = "";
+        return;
+      }
+
+      current = Number(current);
+      paxInput.value = current < 1 ? 1 : current;
+    });
+
+    paxInput.addEventListener("blur", () => {
+      if (!paxInput.value || Number(paxInput.value) < 1) {
+        paxInput.value = 1;
+      }
+    });
+
+    function animateFlip(el, value) {
+      if (el.textContent !== value) {
+        el.textContent = value;
+        el.classList.remove("flip");
+        void el.offsetWidth;
+        el.classList.add("flip");
+        setTimeout(() => el.classList.remove("flip"), 180);
+      }
+    }
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance <= 0) {
+        [daysBox, hoursBox, minutesBox, secondsBox].forEach(box => box.textContent = "00");
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      animateFlip(daysBox, String(days).padStart(2, '0'));
+      animateFlip(hoursBox, String(hours).padStart(2, '0'));
+      animateFlip(minutesBox, String(minutes).padStart(2, '0'));
+      animateFlip(secondsBox, String(seconds).padStart(2, '0'));
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    async function loadGuestCount() {
+      try {
+        const res = await fetch(SCRIPT_URL + "?action=count");
+        const data = await res.json();
+
+        if (data.success) {
+          guestCounter.innerHTML = `👥 ${data.totalGuests} orang akan hadir setakat ini`;
+        } else {
+          guestCounter.innerHTML = "👥 Jumlah tetamu belum dapat dipaparkan lagi";
+        }
+      } catch (error) {
+        guestCounter.innerHTML = "👥 Jumlah tetamu belum dapat dipaparkan lagi";
+      }
+    }
+
+    loadGuestCount();
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (!data.pax || Number(data.pax) < 1) {
+        data.pax = 1;
+      }
+
+      try {
+        const formBody = new URLSearchParams(data).toString();
+
+        const res = await fetch(SCRIPT_URL, {
+          method: "POST",
+          body: formBody,
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        });
+
+        const result = await res.json();
+
+        if (result.success) {
+          successMsg.style.display = "block";
+          form.reset();
+          paxInput.value = 1;
+          loadGuestCount();
+        } else {
+          alert("RSVP gagal dihantar:" + (result.error || "Unknown error"));
+          console.error("Apps Script error:", result.error);
+        }
+      } catch (error) {
+        alert("Ada ralat sambungan. Cuba lagi ya.");
+        console.error(error);
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
