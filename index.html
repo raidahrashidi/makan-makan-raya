@@ -142,22 +142,6 @@
       line-height: 1;
     }
 
-    .welcome-kicker {
-      font-size: 0.92rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: var(--primary-dark);
-      margin-bottom: 12px;
-    }
-
-    .welcome-card p {
-      margin: 0 auto 22px;
-      max-width: 380px;
-      line-height: 1.9;
-      color: var(--muted);
-    }
-
     .open-btn,
     .music-btn,
     .contact-btn,
@@ -236,28 +220,6 @@
       color: white;
     }
 
-    .mini-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.28);
-      font-size: 0.88rem;
-      margin-bottom: 14px;
-    }
-
-    .hero-family {
-      margin: 0 0 10px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      letter-spacing: 1px;
-      color: rgba(255,255,255,0.96);
-      text-shadow: 0 8px 18px rgba(0,0,0,0.14);
-    }
-
     .hero-title {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
@@ -266,7 +228,7 @@
       letter-spacing: 0.3px;
       text-shadow: 0 10px 24px rgba(0,0,0,0.18);
     }
-    
+
     .hero-subtitle {
       margin: 16px 0 18px;
       max-width: 650px;
@@ -326,13 +288,6 @@
       margin: 20px 0 0;
     }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 16px;
-    }
-
-    .detail-box,
     .countdown-card,
     .guest-counter,
     .map-card,
@@ -346,28 +301,6 @@
       border: 1px solid #ffe7f0;
       box-shadow: 0 12px 28px rgba(227, 164, 194, 0.10);
     }
-
-    .detail-box {
-      padding: 18px;
-    }
-
-    .detail-label {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-    }
-
-    .detail-value,
-    .detail-value a {
-      color: var(--text);
-      text-decoration: none;
-      line-height: 1.7;
-      font-size: 0.98rem;
-    }
-
-    .detail-value a:hover,
-    .map-actions a:hover { text-decoration: underline; }
 
     .countdown-card {
       padding: 22px;
@@ -404,13 +337,6 @@
     .event-inline-meta span {
       opacity: 0.45;
       margin: 0 10px;
-    }
-
-    .countdown-time {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      line-height: 1.55;
     }
 
     .flip-countdown {
@@ -516,54 +442,15 @@
       text-decoration: none;
     }
 
-    .info-pills {
-      margin-top: 18px;
-      padding: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .pill {
-      background: #fff3f8;
-      border: 1px solid #f4d5e3;
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 0.93rem;
-      color: var(--primary-dark);
-      font-weight: 600;
-    }
-
     .rsvp-layout {
+      display: grid;
       grid-template-columns: 0.92fr 1.08fr;
       gap: 20px;
       align-items: start;
     }
 
-    .rsvp-side,
     .rsvp-card {
       padding: 22px;
-    }
-
-    .rsvp-side {
-      background: linear-gradient(180deg, rgba(255,243,248,0.95), rgba(255,250,246,0.95));
-      border-radius: var(--radius-lg);
-      border: 1px solid #ffe4ef;
-      box-shadow: 0 12px 28px rgba(227, 164, 194, 0.10);
-    }
-
-    .rsvp-side p {
-      margin: 0 0 14px;
-      line-height: 1.85;
-      color: var(--muted);
-    }
-
-    .rsvp-tips {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--text);
-      line-height: 1.9;
     }
 
     form {
@@ -636,6 +523,13 @@
       filter: brightness(1.02);
     }
 
+    .pax-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
     #paxInput {
       flex: 1;
       text-align: center;
@@ -681,6 +575,12 @@
       filter: brightness(1.02);
     }
 
+    .btn:disabled {
+      opacity: 0.75;
+      cursor: wait;
+      transform: none;
+    }
+
     .success {
       position: fixed;
       top: 18px;
@@ -702,13 +602,13 @@
       z-index: 2000;
       text-align: center;
     }
-    
+
     .success.show {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0) scale(1);
     }
-    
+
     .toast-title {
       font-size: 0.98rem;
       font-weight: 700;
@@ -716,36 +616,12 @@
       line-height: 1.3;
       margin-bottom: 2px;
     }
-    
+
     .toast-subtitle {
       font-size: 0.88rem;
       font-weight: 400;
       color: #6f5a64;
       line-height: 1.4;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .gallery-card {
-      overflow: hidden;
-    }
-
-    .gallery-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .gallery-card div {
-      padding: 14px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
     }
 
     .contact-actions {
@@ -811,9 +687,13 @@
     }
 
     @media (max-width: 900px) {
-      .rsvp-layout, 
+      .rsvp-layout {
+        grid-template-columns: 1fr;
+      }
 
-      .hero-title { font-size: 3.1rem; }
+      .hero-title {
+        font-size: 3.1rem;
+      }
     }
 
     @media (max-width: 640px) {
@@ -821,11 +701,8 @@
       .hero-image-wrap { height: 320px; }
       .hero-intro { left: 18px; right: 18px; bottom: 18px; }
       .hero-title { font-size: 2.5rem; }
-      .hero-family { font-size: 1.25rem; }
       .content, .section-card { padding: 18px; }
-      .details-grid { grid-template-columns: 1fr; }
       .opening h2 { font-size: 2.35rem; }
-      .countdown-time { font-size: 1.28rem; }
       .flip-countdown { grid-template-columns: repeat(2, 1fr); }
       .flip-number { min-height: 72px; font-size: 1.6rem; }
       .event-inline-meta {
@@ -845,14 +722,8 @@
 <body>
   <div class="welcome-screen" id="welcomeScreen">
     <div class="welcome-card">
-      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="ketupat-corner ketupat-top-right"></div>
       <h1>Makan Makan Raya</h1>
-<!--      <p>
-        Assalamualaikum 🌸<br>
-        Dengan penuh kasih dan rasa syukur,<br>
-        anda dijemput untuk<br>
-        memeriahkan jamuan raya di rumah kami.
-      </p>-->
       <button class="open-btn" id="openInvitationBtn">Buka Jemputan ✨</button>
     </div>
   </div>
@@ -873,14 +744,12 @@
 
   <div class="wrapper">
     <section class="hero-card fade-up">
-<!--      <div class="ketupat-corner ketupat-top-left"> </div>
-      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="ketupat-corner ketupat-top-left"></div>
+      <div class="ketupat-corner ketupat-top-right"></div>
       <div class="hero-image-wrap">
-        <img src="satu.png" class="hero-image">
+        <img src="satu.png" class="hero-image" alt="Makan Makan Raya">
         <div class="hero-overlay"></div>
         <div class="hero-intro">
-          <div class="mini-badge">🌸 Aidilfitri Gathering • Open House Vibes</div> 
-          <p class="hero-family">Keluarga Raihana Zahra</p>
           <h1 class="hero-title">Makan Makan Raya</h1>
           <p class="hero-subtitle">
             Jemput datang rumah kami untuk sama-sama beraya,<br>
@@ -889,7 +758,7 @@
           </p>
           <div class="scroll-hint">Scroll to open invitation ↓</div>
         </div>
-      </div> -->
+      </div>
 
       <div class="content">
         <div class="opening fade-up">
@@ -909,9 +778,11 @@
         <div class="grid-2 fade-up">
           <div class="countdown-card" style="grid-column: 1 / -1;">
             <h3>Detik Menuju Hari Raya</h3>
-            <div class="event-inline-meta">18 April 2026 <span>|</span> 11:00 pagi – 5:00 petang</div>
-            <div class="countdown-text">Tak sabar nak sambut semua orang di rumah kami.<br>
-              Lagi sedikit je sebelum kita jumpa ✨</div>
+            <div class="event-inline-meta">18 April 2026 <span>|</span> 12:00 tengah hari – 6:00 petang</div>
+            <div class="countdown-text">
+              Tak sabar nak sambut semua orang di rumah kami.<br>
+              Lagi sedikit je sebelum kita jumpa ✨
+            </div>
 
             <div class="flip-countdown" id="flipCountdown">
               <div class="flip-unit">
@@ -939,8 +810,8 @@
     </section>
 
     <section class="section-card fade-up">
-      <div class="ketupat-corner ketupat-top-left"> </div>
-      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="ketupat-corner ketupat-top-left"></div>
+      <div class="ketupat-corner ketupat-top-right"></div>
       <div class="section-heading">
         <h2 class="section-title">Lokasi Majlis</h2>
         <p>Tekan peta untuk rancang perjalanan anda,<br>
@@ -958,17 +829,11 @@
           📍 <a href="https://maps.google.com/?q=3.0780,101.48942" target="_blank">Buka lokasi penuh di Google Maps</a>
         </div>
       </div>
-
-   <!--   <div class="info-pills">
-        <div class="pill">🌸 Santai & mesra</div>
-        <div class="pill">📸 Boleh ambil gambar cantik</div>
-        <div class="pill">💖 Datang bawa senyuman</div>
-      </div> -->
     </section>
 
     <section class="section-card fade-up">
-      <div class="ketupat-corner ketupat-top-left"> </div>
-      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="ketupat-corner ketupat-top-left"></div>
+      <div class="ketupat-corner ketupat-top-right"></div>
       <div class="section-heading">
         <h2 class="section-title">RSVP Kehadiran</h2>
         <p>Boleh isi kehadiran dekat bawah ya supaya kami boleh buat<br>
@@ -976,19 +841,6 @@
       </div>
 
       <div class="rsvp-layout">
- <!--       <div class="rsvp-side">
-          <h3 class="section-title" style="font-size: 1.8rem; text-align:left; margin-bottom:10px;">Info Ringkas</h3>
-          <p>
-            Isi RSVP ni kejap je. Bila anda hantar, nama anda akan terus masuk ke senarai tetamu kami dan notifikasi akan dihantar ke Telegram secara automatik.
-          </p>
-          <ul class="rsvp-tips">
-            <li>Isi nama dan nombor telefon yang mudah dihubungi</li>
-            <li>Pilih sama ada hadir atau tidak hadir</li>
-            <li>Masukkan bilangan tetamu supaya mudah kami sediakan tempat</li>
-            <li>Kalau ada apa-apa pesan, boleh tulis sekali</li>
-          </ul> 
-        </div> -->
-
         <div class="rsvp-card">
           <form id="rsvpForm">
             <input type="text" name="name" placeholder="Nama" required>
@@ -1021,42 +873,27 @@
     </section>
 
     <section class="section-card fade-up">
-      <div class="ketupat-corner ketupat-top-left"> </div>
-      <div class="ketupat-corner ketupat-top-right"> </div>
-      <div class="section-heading">
-    <!--    <h2 class="section-title">Sedikit Preview Suasana</h2>
-        <p>Kalau nak bagi website nampak lebih premium, boleh letak beberapa gambar suasana rumah, juadah, atau vibe raya.</p>
-      </div> 
-
-      <div class="gallery-grid">
-        <div class="gallery-card">
-          <img src="YOUR_GALLERY_IMAGE_1" alt="Raya vibes 1">
-          <div>Ruang santai untuk borak-borak</div>
-        </div>
-        <div class="gallery-card">
-          <img src="YOUR_GALLERY_IMAGE_2" alt="Raya vibes 2">
-          <div>Juadah raya yang menanti</div>
-        </div>
-        <div class="gallery-card">
-          <img src="YOUR_GALLERY_IMAGE_3" alt="Raya vibes 3">
-          <div>Sudut manis untuk ambil gambar</div>
-        </div>
-      </div> -->
+      <div class="ketupat-corner ketupat-top-left"></div>
+      <div class="ketupat-corner ketupat-top-right"></div>
 
       <div class="contact-actions">
-        <a class="contact-btn" href="tel:+60148503394">📞Hubungi Tuan Rumah</a>
-        <a class="calendar-btn" target="_blank" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Makan%20Makan%20Raya&dates=20260418T030000Z/20260412T090000Z&details=Jemputan%20jamuan%20raya%20di%20rumah&location=Kampung%20Padang%20Lalang">🗓️ Simpan ke Calendar</a>
+        <a class="contact-btn" href="tel:+60148503394">📞 Hubungi Tuan Rumah</a>
+        <a
+          class="calendar-btn"
+          target="_blank"
+          href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Makan%20Makan%20Raya&dates=20260418T040000Z/20260418T100000Z&details=Jemputan%20jamuan%20raya%20di%20rumah&location=Kampung%20Padang%20Lalang"
+        >🗓️ Simpan ke Calendar</a>
       </div>
     </section>
 
     <section class="section-card fade-up">
-      <div class="ketupat-corner ketupat-top-left"> </div>
-      <div class="ketupat-corner ketupat-top-right"> </div>
+      <div class="ketupat-corner ketupat-top-left"></div>
+      <div class="ketupat-corner ketupat-top-right"></div>
       <div class="closing-card">
         <h3>Kehadiran Anda Sangat Bermakna</h3>
         <p>
           Semoga dengan kehadiran anda, rumah kami bertambah meriah,<br>
-          hati bertambah lapang,dan Aidilfitri kali ini<br>
+          hati bertambah lapang, dan Aidilfitri kali ini<br>
           jadi lebih indah untuk dikenang.<br>
           Kami tunggu anda di rumah ya 💕
         </p>
@@ -1065,12 +902,14 @@
   </div>
 
   <script>
-    const eventDate = new Date("2026-04-18T11:00:00").getTime();
+    const eventDate = new Date("2026-04-18T12:00:00").getTime();
     const daysBox = document.getElementById("daysBox");
     const hoursBox = document.getElementById("hoursBox");
     const minutesBox = document.getElementById("minutesBox");
     const secondsBox = document.getElementById("secondsBox");
+
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwD_QVXV0ncUETVwqTtFewAc5Uk0IKrFpfxBsT3EnrkBH_fzpl4o_CdkxqNG3tTiA4N/exec";
+
     const form = document.getElementById("rsvpForm");
     const successMsg = document.getElementById("successMsg");
     const guestCounter = document.getElementById("guestCounter");
@@ -1085,47 +924,44 @@
 
     let isPlaying = false;
 
-    // 🎧 fade in function
     function fadeInAudio(audio, duration = 2000) {
-    audio.volume = 0;
-    audio.play();
+      audio.volume = 0;
+      audio.play();
 
-    let step = 0.05;
-    let interval = duration * step;
+      let step = 0.05;
+      let interval = duration * step;
 
-    let fade = setInterval(() => {
+      let fade = setInterval(() => {
         if (audio.volume < 0.6) {
-        audio.volume = Math.min(audio.volume + step, 0.6);
+          audio.volume = Math.min(audio.volume + step, 0.6);
         } else {
-        clearInterval(fade);
+          clearInterval(fade);
         }
-    }, interval);
+      }, interval);
     }
 
-    // buka invitation → auto play with fade
     openInvitationBtn.addEventListener("click", async () => {
-    welcomeScreen.classList.add("hidden");
+      welcomeScreen.classList.add("hidden");
 
-    try {
+      try {
         fadeInAudio(music, 2000);
         isPlaying = true;
         musicBtn.textContent = "⏸ Pause Lagu Raya";
-    } catch (error) {
+      } catch (error) {
         console.log("Autoplay blocked");
-    }
+      }
     });
 
-    // button control
     musicBtn.addEventListener("click", () => {
-    if (!isPlaying) {
+      if (!isPlaying) {
         fadeInAudio(music, 2000);
         isPlaying = true;
         musicBtn.textContent = "⏸ Pause Lagu Raya";
-    } else {
+      } else {
         music.pause();
         isPlaying = false;
         musicBtn.textContent = "🎵 Play Lagu Raya";
-    }
+      }
     });
 
     minusPax.addEventListener("click", () => {
@@ -1198,10 +1034,10 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      animateFlip(daysBox, String(days).padStart(2, '0'));
-      animateFlip(hoursBox, String(hours).padStart(2, '0'));
-      animateFlip(minutesBox, String(minutes).padStart(2, '0'));
-      animateFlip(secondsBox, String(seconds).padStart(2, '0'));
+      animateFlip(daysBox, String(days).padStart(2, "0"));
+      animateFlip(hoursBox, String(hours).padStart(2, "0"));
+      animateFlip(minutesBox, String(minutes).padStart(2, "0"));
+      animateFlip(secondsBox, String(seconds).padStart(2, "0"));
     }
 
     updateCountdown();
@@ -1229,6 +1065,7 @@
 
       const data = Object.fromEntries(new FormData(form).entries());
       const submitBtn = form.querySelector('button[type="submit"]');
+
       submitBtn.disabled = true;
       submitBtn.textContent = "Menghantar...";
 
@@ -1251,72 +1088,57 @@
 
         const result = await res.json();
 
-      if (result.success) {
-        let title = "";
-        let subtitle = "";
-      
-        if (data.attendance === "Hadir") {
-          title = "✅ RSVP diterima";
-          subtitle = "Jumpa nanti!";
-        } else {
-          title = "💌 Terima kasih maklumkan";
-          subtitle = "Semoga kita jumpa lain kali";
-        }
-      
-        successMsg.innerHTML = `
-          <div class="toast-title">${title}</div>
-          <div class="toast-subtitle">${subtitle}</div>
-        `;
-      
-        successMsg.classList.add("show");
-        setTimeout(() => {
-          successMsg.classList.remove("show");
-        }, 2500);
-      
-        form.reset();
-        paxInput.value = 1;
-        paxInput.disabled = false;
-        minusPax.disabled = false;
-        plusPax.disabled = false;
-      
-        loadGuestCount();
-      }
+        if (result.success) {
+          let title = "";
+          let subtitle = "";
 
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Hantar RSVP 💌";
-          
+          if (data.attendance === "Hadir") {
+            title = "✅ RSVP diterima";
+            subtitle = "Jumpa nanti!";
+          } else {
+            title = "💌 Terima kasih maklumkan";
+            subtitle = "Semoga kita jumpa lain kali";
+          }
+
+          successMsg.innerHTML = `
+            <div class="toast-title">${title}</div>
+            <div class="toast-subtitle">${subtitle}</div>
+          `;
+
           successMsg.classList.add("show");
           setTimeout(() => {
             successMsg.classList.remove("show");
           }, 2500);
+
           form.reset();
           paxInput.value = 1;
           paxInput.disabled = false;
           minusPax.disabled = false;
           plusPax.disabled = false;
+
           loadGuestCount();
         } else {
-          alert("RSVP gagal dihantar:" + (result.error || "Unknown error"));
+          alert("RSVP gagal dihantar: " + (result.error || "Unknown error"));
           console.error("Apps Script error:", result.error);
         }
       } catch (error) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Hantar RSVP 💌";
         alert("Ada ralat sambungan. Cuba lagi ya.");
         console.error(error);
-    
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Hantar RSVP 💌";
       }
     });
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+          entry.target.classList.add("show");
         }
       });
     }, { threshold: 0.14 });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll(".fade-up").forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
