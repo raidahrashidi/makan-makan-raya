@@ -1226,6 +1226,16 @@
         const result = await res.json();
 
         if (result.success) {
+          let message = "";
+          
+          if (data.attendance === "Hadir") {
+            message = "RSVP diterima ✨ Jumpa nanti!";
+          } else {
+            message = "Alaa tak dapat jumpa kali ni 🥺 <br> Tapi takpe, lain kali ya 💖";
+          }
+          
+          successMsg.textContent = message;
+          
           successMsg.classList.add("show");
           setTimeout(() => {
             successMsg.classList.remove("show");
