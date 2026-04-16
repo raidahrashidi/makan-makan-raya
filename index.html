@@ -679,29 +679,45 @@
 
     .success {
       position: fixed;
+      top: 18px;
       left: 50%;
-      bottom: 24px;
-      transform: translateX(-50%) translateY(20px);
-      min-width: 220px;
-      max-width: 90%;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #7b5468, #9f5d7b);
-      color: white;
-      font-weight: 500;
-      font-size: 0.9rem;
-      text-align: center;
-      box-shadow: 0 14px 30px rgba(123, 84, 104, 0.35);
+      transform: translateX(-50%) translateY(-18px) scale(0.97);
+      width: min(92vw, 360px);
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow:
+        0 18px 40px rgba(60, 40, 50, 0.16),
+        0 4px 12px rgba(60, 40, 50, 0.08);
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.28s ease;
       z-index: 2000;
+      text-align: center;
     }
     
     .success.show {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(0);
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+    
+    .toast-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #3f3138;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    
+    .toast-subtitle {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: #6f5a64;
+      line-height: 1.4;
     }
 
     .gallery-grid {
@@ -992,7 +1008,10 @@
             <button class="btn" type="submit">Hantar RSVP 💌</button>
           </form>
 
-          <div class="success" id="successMsg">RSVP dihantar ✨ Jumpa nanti!</div>
+          <div class="success" id="successMsg">
+            <div class="toast-title">RSVP diterima</div>
+            <div class="toast-subtitle">Jumpa nanti!</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1225,16 +1244,36 @@
 
         const result = await res.json();
 
-        if (result.success) {
-          let message = "";
-          
-          if (data.attendance === "Hadir") {
-            message = "RSVP diterima ✨ Jumpa nanti!";
-          } else {
-            message = "Alaa tak dapat jumpa kali ni 🥺 <br> Tapi takpe, lain kali ya 💖";
-          }
-          
-          successMsg.innerHTML = message;
+      if (result.success) {
+        let title = "";
+        let subtitle = "";
+      
+        if (data.attendance === "Hadir") {
+          title = "✅ RSVP diterima";
+          subtitle = "Jumpa nanti!";
+        } else {
+          title = "💌 Terima kasih maklumkan";
+          subtitle = "Semoga kita jumpa lain kali";
+        }
+      
+        successMsg.innerHTML = `
+          <div class="toast-title">${title}</div>
+          <div class="toast-subtitle">${subtitle}</div>
+        `;
+      
+        successMsg.classList.add("show");
+        setTimeout(() => {
+          successMsg.classList.remove("show");
+        }, 2500);
+      
+        form.reset();
+        paxInput.value = 1;
+        paxInput.disabled = false;
+        minusPax.disabled = false;
+        plusPax.disabled = false;
+      
+        loadGuestCount();
+      }
           
           successMsg.classList.add("show");
           setTimeout(() => {
