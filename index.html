@@ -678,14 +678,30 @@
     }
 
     .success {
-      display: none;
-      margin-top: 7px;
-      padding: 7px 8px;
-      border-radius: 8px;
-      background: #fff3f8;
-      border: 1px solid #f0c8d9;
-      color: var(--primary-dark);
-      font-weight: 600;
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      min-width: 220px;
+      max-width: 90%;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(199, 134, 165, 0.95);
+      color: white;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(199, 134, 165, 0.28);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 2000;
+    }
+    
+    .success.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     .gallery-grid {
@@ -976,7 +992,7 @@
             <button class="btn" type="submit">Hantar RSVP 💌</button>
           </form>
 
-          <div class="success" id="successMsg">RSVP berjaya dihantar. Yay, jumpa nanti 🌸</div>
+          <div class="success" id="successMsg">RSVP dihantar ✨ Jumpa nanti!</div>
         </div>
       </div>
     </section>
@@ -1042,6 +1058,7 @@
     const openInvitationBtn = document.getElementById("openInvitationBtn");
     const music = document.getElementById("bgMusic");
     const musicBtn = document.getElementById("musicBtn");
+    const attendanceSelect = document.querySelector('select[name="attendance"]');
 
     let isPlaying = false;
 
@@ -1118,6 +1135,22 @@
       }
     });
 
+    attendanceSelect.addEventListener("change", () => {
+      if (attendanceSelect.value === "Tidak Hadir") {
+        paxInput.value = 0;
+        paxInput.disabled = true;
+        minusPax.disabled = true;
+        plusPax.disabled = true;
+      } else {
+        if (!paxInput.value || Number(paxInput.value) < 1) {
+          paxInput.value = 1;
+        }
+        paxInput.disabled = false;
+        minusPax.disabled = false;
+        plusPax.disabled = false;
+      }
+    });
+
     function animateFlip(el, value) {
       if (el.textContent !== value) {
         el.textContent = value;
@@ -1173,7 +1206,9 @@
 
       const data = Object.fromEntries(new FormData(form).entries());
 
-      if (!data.pax || Number(data.pax) < 1) {
+      if (data.attendance === "Tidak Hadir") {
+        data.pax = 0;
+      } else if (!data.pax || Number(data.pax) < 1) {
         data.pax = 1;
       }
 
@@ -1191,7 +1226,10 @@
         const result = await res.json();
 
         if (result.success) {
-          successMsg.style.display = "block";
+          successMsg.classList.add("show");
+          setTimeout(() => {
+            successMsg.classList.remove("show");
+          }, 2500);
           form.reset();
           paxInput.value = 1;
           loadGuestCount();
