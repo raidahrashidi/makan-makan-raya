@@ -1224,6 +1224,9 @@
       e.preventDefault();
 
       const data = Object.fromEntries(new FormData(form).entries());
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Menghantar...";
 
       if (data.attendance === "Tidak Hadir") {
         data.pax = 0;
@@ -1274,6 +1277,9 @@
       
         loadGuestCount();
       }
+
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Hantar RSVP 💌";
           
           successMsg.classList.add("show");
           setTimeout(() => {
@@ -1290,8 +1296,11 @@
           console.error("Apps Script error:", result.error);
         }
       } catch (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Hantar RSVP 💌";
         alert("Ada ralat sambungan. Cuba lagi ya.");
         console.error(error);
+    
       }
     });
 
