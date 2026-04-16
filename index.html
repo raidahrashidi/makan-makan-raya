@@ -217,19 +217,22 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: brightness(0.9) saturate(1.05);
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(123, 84, 104, 0.45), rgba(255,255,255,0.05));
+      background:
+        linear-gradient(to top, rgba(74, 45, 60, 0.50), rgba(255,255,255,0.04)),
+        linear-gradient(135deg, rgba(199,134,165,0.22), rgba(255,255,255,0.06));
     }
 
     .hero-intro {
       position: absolute;
-      left: 28px;
-      right: 28px;
-      bottom: 28px;
+      left: 34px;
+      right: 34px;
+      bottom: 40px;
       color: white;
     }
 
@@ -258,31 +261,32 @@
     .hero-title {
       margin: 0;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 4rem;
-      line-height: 0.95;
-      letter-spacing: 0.5px;
-      text-shadow: 0 10px 24px rgba(0,0,0,0.16);
+      font-size: 4.3rem;
+      line-height: 0.98;
+      letter-spacing: 0.3px;
+      text-shadow: 0 10px 24px rgba(0,0,0,0.18);
     }
-
+    
     .hero-subtitle {
-      margin: 14px 0 18px;
-      max-width: 720px;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.95);
+      margin: 16px 0 18px;
+      max-width: 650px;
+      font-size: 1.02rem;
+      line-height: 1.95;
+      color: rgba(255,255,255,0.96);
     }
 
     .scroll-hint {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.92);
-      font-size: 0.92rem;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.84rem;
       font-weight: 500;
     }
 
     .content {
-      padding: 30px;
+      padding: 34px 30px 30px;
+      background: linear-gradient(180deg, rgba(255,250,252,0.96), rgba(255,255,255,0.92));
     }
 
     .opening {
@@ -300,11 +304,11 @@
     }
 
     .opening h2 {
-      margin: 0 0 12px;
+      margin: 0 0 14px;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      color: var(--primary-dark);
-      line-height: 1;
+      font-size: 3.2rem;
+      color: #9a5c79;
+      line-height: 0.98;
     }
 
     .opening p {
@@ -872,7 +876,7 @@
       <div class="ketupat-corner ketupat-top-left"> </div>
       <div class="ketupat-corner ketupat-top-right"> </div>
       <div class="hero-image-wrap">
-        <img src="dua.png" class="hero-image">
+        <img src="satu.png" class="hero-image">
         <div class="hero-overlay"></div>
         <div class="hero-intro">
           <!-- <div class="mini-badge">🌸 Aidilfitri Gathering • Open House Vibes</div> 
