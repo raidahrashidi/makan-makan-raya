@@ -686,12 +686,12 @@
       max-width: 90%;
       padding: 10px 16px;
       border-radius: 999px;
-      background: rgba(199, 134, 165, 0.95);
+      background: linear-gradient(135deg, #7b5468, #9f5d7b);
       color: white;
       font-weight: 500;
       font-size: 0.9rem;
       text-align: center;
-      box-shadow: 0 12px 28px rgba(199, 134, 165, 0.28);
+      box-shadow: 0 14px 30px rgba(123, 84, 104, 0.35);
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
@@ -1234,7 +1234,7 @@
             message = "Alaa tak dapat jumpa kali ni 🥺 <br> Tapi takpe, lain kali ya 💖";
           }
           
-          successMsg.textContent = message;
+          successMsg.innerHTML = message;
           
           successMsg.classList.add("show");
           setTimeout(() => {
@@ -1242,6 +1242,9 @@
           }, 2500);
           form.reset();
           paxInput.value = 1;
+          paxInput.disabled = false;
+          minusPax.disabled = false;
+          plusPax.disabled = false;
           loadGuestCount();
         } else {
           alert("RSVP gagal dihantar:" + (result.error || "Unknown error"));
